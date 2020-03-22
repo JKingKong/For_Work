@@ -47,3 +47,9 @@ ctrl+d
 docker run -p 6379:6379 --name 自定义名字 --requirepass "密码" -d 镜像id
 ```
 
+进入redis命令界面
+
+```java
+docker exec -it redis的容器id  redis-cli
+```
+

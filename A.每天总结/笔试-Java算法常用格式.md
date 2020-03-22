@@ -1,12 +1,10 @@
 # Java笔试常用格式
 
-## 算法输入输出格式
-
-### 大致架构
+## 大致架构
 
 ```java
 import java.util.*;  //导入标准库
-
+import java.io.*;
 public class Main{ //主类
     
     //主函数
@@ -14,52 +12,78 @@ public class Main{ //主类
         //打开输入流
         Scanner sc = new Scanner(System.in);
         //获取输入流中的值
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+        	int m = sc.nextInt();
+        }
         fun(n, m); //静态方法
         sc.close();
     }
     
  	//静态方法方便调用
     public static void fun(int n, int m){
-        int[] nums = new int[]{n , m};
-        System.out.println(nums[(n - m) >>> 31]);
+        System.out.println("这是一个测试");
     }
 }
 ```
 
-### Scanner常用方法：
+## Scanner常用方法：
+
+### 输入流
 
 ```java
-// 输入流
+//打开流
 Scanner sc = new Scanner(System.in); 
+//关闭流
+sc.close();
+```
+
+### 获取数
+
+```java
 //获取一个整数
 int a = sc.nextInt();
-
+//获取double
 double b = sc.nextDouble();
-//是否还有下一个数
+```
+
+### 判断是否还有下一个
+
+```java
 boolean isHas = sc.hasNext();
+```
+
+### 获取一行字符
+
+```java
 //获取一行(以以Enter为结束符,可以获得空白)
 String line = sc.nextLine();
-
-
-//关闭流：
-sc.close();
-
-//写算法要有输出：
-//格式化输出
-System.out.printf("%d个数的和为%f\n",m,sum);
-System.out.printf("%d个数的平均值是%f\n",m,sum/m);
+String[] strArr = line.split(","); 
 ```
 
 `String s = sc.next()`:
 
-```java
 1、一定要读取到有效字符后才可以结束输入。
 2、对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。
 3、只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。
 next() 不能得到带有空格的字符串。
+
+### 输出
+
+```java
+//格式化输出
+System.out.printf("%d个数的和为%f\n",m,sum);
+System.out.printf("%d个数的平均值是%f\n",m,sum/m);
+
+//带换行符输出
+System.out.println();
+
+//不带换行符输出
+System.out.print();
+
+//例子
+int a = 10;
+System.out.print("a:"+a);   // 输出结果：   a:10
 ```
 
 ### 写算法流程
@@ -101,12 +125,17 @@ q.peekFirst();  查看队头
 
 ### 优先队列
 
-```
+#### 默认最小堆
+
+```java
 //1，默认实现的是最小堆
 PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
-// 最大堆：
+```
 
-//2，通过比较器排序，实现最大堆
+#### 自定义最大堆
+
+```java
+//法一：，通过比较器排序，实现最大堆
 PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
@@ -117,40 +146,61 @@ PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(new Comparator<Integ
 				return o2.compareTo(o1);
 			}
 });
-
+//法二：
 PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> {
     return b - a;  // a为原后 b为原前
 });
+```
 
-                                                            
+#### 一些常用的方法
+
+```java
 注意4：插入方法（offer()、poll()、remove() 、add() 方法）时间复杂度为O(log(n)) ；
 remove(Object) 和 contains(Object) 时间复杂度为O(n)；
-检索方法（peek、element 和 size）时间复杂度为常量。
-                                                            
-			
+检索方法（peek、element 和 size）时间复杂度为常量。	
 ```
 
 ## 集合
 
 ### List
 
-1. 数组---->ArrayList
+#### 数组---->ArrayList
 
-   ```java
-   ArrayList<Element> arrayList = new ArrayList<Element>(Arrays.asList(array));
-   
-   List<Element> list = Arrays.asList(array);
-   ```
+```java
+ArrayList<Element> arrayList = new ArrayList<Element>(Arrays.asList(array));
 
-2. ArrayList---->数组
+List<Element> list = Arrays.asList(array);
+```
 
-   ```java
-   
-   ```
+#### ArrayList---->数组
 
-   
+```java
 
-3. 
+```
+
+#### 排序
+
+##### 默认排序
+
+```java
+ArrayList<Integer> listInt = new ArrayList<Integer>();
+//默认使用字典序  数是从小到大
+Collections.sort(listInt);
+```
+
+##### 自定义排序方式
+
+```java
+//自定义Comparator对象，自定义排序(从大到小)
+Comparator c = new Comparator<Integer>() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+    }
+};	
+//
+Collections.sort(listInt,c);
+```
 
 ## 数组
 
@@ -178,11 +228,7 @@ res.toArray(new int[0][]);
    ```
 
 
-
-
 头尾去除使用while判断
-
-
 
 # 常用算法
 
@@ -254,13 +300,7 @@ class Solution {
 }
 ```
 
-
-
 ### 快速排序
-
-
-
-
 
 ## 问题
 
